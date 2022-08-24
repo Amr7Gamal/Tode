@@ -1,25 +1,30 @@
 import 'package:calendar_timeline/calendar_timeline.dart';
 import 'package:flutter/material.dart';
-import 'package:todo/tasks/task.dart';
+import 'package:provider/provider.dart';
+import 'package:todo/provider/setting_provider.dart';
+import 'package:todo/tasks/taskItem.dart';
 
 class Tasks extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var settingProvider = Provider.of<SettingProvider>(context);
+
     return Column(
       children: [
         CalendarTimeline(
-          initialDate: DateTime(2020, 4, 20),
-          firstDate: DateTime(2019, 1, 15),
-          lastDate: DateTime(2020, 11, 20),
-          onDateSelected: (date) => print(date),
+          initialDate: DateTime.now(),
+          firstDate: DateTime.now().subtract(Duration(days: 365)),
+          lastDate: DateTime.now().add(Duration(days: 365)),
+          onDateSelected: (date) => () {},
+          showYears: true,
           leftMargin: 20,
           monthColor: Colors.blueGrey,
           dayColor: Colors.teal[200],
           activeDayColor: Colors.white,
-          activeBackgroundDayColor: Colors.redAccent[100],
+          activeBackgroundDayColor: Theme.of(context).primaryColor,
           dotsColor: Color(0xFF333A47),
-          selectableDayPredicate: (date) => date.day != 23,
-          locale: 'en_ISO',
+          selectableDayPredicate: (date) => true,
+          locale: settingProvider.languaga,
         ),
         Expanded(
           child: ListView.builder(
