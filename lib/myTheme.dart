@@ -8,6 +8,7 @@ class MyTheme {
   static final Color whiteColor = Colors.white;
   static final Color blackColor = Colors.black;
   static final Color black38Color = Colors.black38;
+  static final Color redColor = Colors.red;
 
   static final ThemeData lightTheme = ThemeData(
       primaryColor: lightBlueColor,

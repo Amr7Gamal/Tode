@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:todo/datebase/taskData.dart';
-import 'package:todo/tasks/taskItem.dart';
 
 class MyDateBase {
   static CollectionReference<TaskData> getTask() {
@@ -12,7 +11,7 @@ class MyDateBase {
   }
 
   void insertTask(TaskData task) {
-    getTask().a
+    getTask();
   }
 
 }
