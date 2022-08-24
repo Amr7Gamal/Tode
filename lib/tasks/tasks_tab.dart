@@ -11,20 +11,23 @@ class Tasks extends StatelessWidget {
 
     return Column(
       children: [
-        CalendarTimeline(
-          initialDate: DateTime.now(),
-          firstDate: DateTime.now().subtract(Duration(days: 365)),
-          lastDate: DateTime.now().add(Duration(days: 365)),
-          onDateSelected: (date) => () {},
-          showYears: true,
-          leftMargin: 20,
-          monthColor: Colors.blueGrey,
-          dayColor: Colors.teal[200],
-          activeDayColor: Colors.white,
-          activeBackgroundDayColor: Theme.of(context).primaryColor,
-          dotsColor: Color(0xFF333A47),
-          selectableDayPredicate: (date) => true,
-          locale: settingProvider.languaga,
+        Container(
+          padding: EdgeInsets.symmetric(vertical: 8),
+          child: CalendarTimeline(
+            initialDate: DateTime.now(),
+            firstDate: DateTime.now().subtract(Duration(days: 365)),
+            lastDate: DateTime.now().add(Duration(days: 365)),
+            onDateSelected: (date) => () {},
+            showYears: true,
+            leftMargin: 20,
+            monthColor: Colors.blueGrey,
+            dayColor: Colors.teal[200],
+            activeDayColor: Colors.white,
+            activeBackgroundDayColor: Theme.of(context).primaryColor,
+            dotsColor: Color(0xFF333A47),
+            selectableDayPredicate: (date) => true,
+            locale: settingProvider.languaga,
+          ),
         ),
         Expanded(
           child: ListView.builder(
