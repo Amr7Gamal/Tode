@@ -39,7 +39,7 @@ class _SettingsState extends State<Settings> {
                         fontWeight: FontWeight.w400,
                         color: MyTheme.lightBlueColor),
                   ),
-                  Icon(Icons.redo_outlined)
+                  Icon(Icons.arrow_drop_down)
                 ],
               ),
             ),
@@ -67,7 +67,7 @@ class _SettingsState extends State<Settings> {
                         fontWeight: FontWeight.w400,
                         color: MyTheme.lightBlueColor),
                   ),
-                  Icon(Icons.redo_outlined)
+                  Icon(Icons.arrow_drop_down)
                 ],
               ),
             ),

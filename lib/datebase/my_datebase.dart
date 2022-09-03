@@ -3,15 +3,18 @@ import 'package:todo/datebase/taskData.dart';
 
 class MyDateBase {
   static CollectionReference<TaskData> getTask() {
-    return FirebaseFirestore.instance.collection(TaskData.nameKey)
+    return FirebaseFirestore.instance
+        .collection(TaskData.nameKey)
         .withConverter<TaskData>(
-        fromFirestore: (snapshot, options) =>
-            TaskData.fromFirestore(snapshot.data()!),
-        toFirestore: (TaskData, _) => TaskData.toFirestore());
+            fromFirestore: (snapshot, options) =>
+                TaskData.fromFirestore(snapshot.data()!),
+            toFirestore: (TaskData, _) => TaskData.toFirestore());
   }
 
-  void insertTask(TaskData task) {
-    getTask();
+  static Future<void> insertTask(TaskData task) {
+    var tasksCollection = getTask();
+    var doc = tasksCollection.doc();
+    task.id = doc.id;
+    return doc.set(task);
   }
-
 }

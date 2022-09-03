@@ -8,9 +8,13 @@ import 'package:todo/home.dart';
 import 'package:todo/myTheme.dart';
 import 'package:todo/provider/setting_provider.dart';
 
-void main() {
+import 'firebase_options.dart';
+
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   runApp(ChangeNotifierProvider<SettingProvider>(
     create: (_) => SettingProvider(),

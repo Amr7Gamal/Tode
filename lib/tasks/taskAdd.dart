@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:todo/datebase/my_datebase.dart';
+import 'package:todo/datebase/taskData.dart';
 import 'package:todo/myTheme.dart';
 
-class TaskAdd extends StatelessWidget {
+class TaskAdd extends StatefulWidget {
+  @override
+  State<TaskAdd> createState() => _TaskAddState();
+}
+
+class _TaskAddState extends State<TaskAdd> {
   var formKey = GlobalKey<FormState>();
+  var titleController = TextEditingController();
+  var descriptionController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +34,7 @@ class TaskAdd extends StatelessWidget {
               height: 20,
             ),
             TextFormField(
+              controller: titleController,
               validator: (text) {
                 if (text == null || text == text.trim().isEmpty) {
                   return "Please Enter Title";
@@ -39,6 +49,7 @@ class TaskAdd extends StatelessWidget {
               height: 50,
             ),
             TextFormField(
+              controller: descriptionController,
               validator: (text) {
                 if (text == null || text == text.trim().isEmpty) {
                   return "Please Enter Description";
@@ -57,9 +68,14 @@ class TaskAdd extends StatelessWidget {
                 child: Text("Select Time",
                     textAlign: TextAlign.start,
                     style: Theme.of(context).textTheme.headline2)),
-            Text(
-              "10:30 AM",
-              style: Theme.of(context).textTheme.headline3,
+            InkWell(
+              onTap: () {
+                showDateDialoge();
+              },
+              child: Text(
+                "${selectedDate.year}/${selectedDate.month}/${selectedDate.day}",
+                style: Theme.of(context).textTheme.headline3,
+              ),
             ),
             SizedBox(
               height: 50,
@@ -75,7 +91,34 @@ class TaskAdd extends StatelessWidget {
     );
   }
 
+  DateTime selectedDate = DateTime.now();
+
+  void showDateDialoge() async {
+    DateTime? date = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        firstDate: selectedDate,
+        lastDate: DateTime.now().add(Duration(days: 365)));
+    if (date != null) {
+      selectedDate = date;
+      setState(() {});
+    }
+  }
+
   void addTask() {
-    if (formKey.currentState?.validate() == true) {}
+    if (formKey.currentState?.validate() == true) {
+      String title = titleController.text;
+      String description = descriptionController.text;
+      TaskData task = TaskData(
+        title: title,
+        description: description,
+        dateTime: selectedDate,
+        isDone: false,
+      );
+      MyDateBase.insertTask(task)
+          .then((value) {})
+          .onError((error, stackTrace) {})
+          .timeout(Duration(seconds: 6), onTimeout: () {});
+    }
   }
 }
