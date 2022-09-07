@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:todo/date.dart';
 import 'package:todo/datebase/my_datebase.dart';
 import 'package:todo/datebase/taskData.dart';
 import 'package:todo/myTheme.dart';
+import 'package:todo/showMessage.dart';
 
 class TaskAdd extends StatefulWidget {
   @override
@@ -112,13 +114,25 @@ class _TaskAddState extends State<TaskAdd> {
       TaskData task = TaskData(
         title: title,
         description: description,
-        dateTime: selectedDate,
+        dateTime: dateOnly(selectedDate),
         isDone: false,
       );
-      MyDateBase.insertTask(task)
-          .then((value) {})
-          .onError((error, stackTrace) {})
-          .timeout(Duration(seconds: 6), onTimeout: () {});
+
+      showLoading(context, "Loading . .. ", isCanceLable: false);
+
+      MyDateBase.insertTask(task).then((value) {
+        hideLoading(context);
+        showMessage(context, "done",
+            buttonTextOne: "OK", buttonActionOne: () {});
+      }).onError((error, stackTrace) {
+        hideLoading(context);
+
+        showMessage(context, "error");
+      }).timeout(Duration(seconds: 6), onTimeout: () {
+        hideLoading(context);
+
+        showMessage(context, "done cache");
+      });
     }
   }
 }

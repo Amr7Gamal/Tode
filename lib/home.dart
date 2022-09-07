@@ -54,7 +54,6 @@ class _HomeState extends State<Home> {
           ),
           onPressed: () {
             showTaskAdd();
-            setState(() {});
           },
           child: Icon(Icons.add),
         ),

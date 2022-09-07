@@ -13,7 +13,7 @@ class TaskData {
             title: date["title"],
             description: date["descripion"],
             id: date["id"],
-            dateTime: DateTime.fromMicrosecondsSinceEpoch(date["dateTime"]),
+            dateTime: DateTime.fromMillisecondsSinceEpoch(date["dateTime"]),
             isDone: date["isDone"]);
 
   Map<String, dynamic> toFirestore() {
@@ -21,7 +21,7 @@ class TaskData {
       "title": title,
       "descripion": description,
       "id": id,
-      "dateTime": dateTime?.microsecondsSinceEpoch,
+      "dateTime": dateTime?.millisecondsSinceEpoch,
       "isDone": isDone
     };
   }
