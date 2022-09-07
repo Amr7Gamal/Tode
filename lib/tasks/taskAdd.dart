@@ -130,7 +130,6 @@ class _TaskAddState extends State<TaskAdd> {
         showMessage(context, "error");
       }).timeout(Duration(seconds: 6), onTimeout: () {
         hideLoading(context);
-
         showMessage(context, "done cache");
       });
     }

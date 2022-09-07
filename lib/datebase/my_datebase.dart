@@ -38,4 +38,9 @@ class MyDateBase {
     var doc = getTask().doc(task.id);
     return doc.delete();
   }
+
+  static void editIsDone(TaskData task) {
+    var doc = getTask().doc(task.id);
+    doc.update({"isDone": task.isDone! ? false : true});
+  }
 }

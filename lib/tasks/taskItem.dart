@@ -59,7 +59,9 @@ class Task extends StatelessWidget {
                 width: 4,
                 padding: EdgeInsets.symmetric(horizontal: 21),
                 margin: EdgeInsets.symmetric(vertical: 1, horizontal: 14),
-                color: Theme.of(context).primaryColor,
+                color: task.isDone!
+                    ? MyTheme.greenColor
+                    : Theme.of(context).primaryColor,
               ),
               Expanded(
                 child: Column(
@@ -68,7 +70,12 @@ class Task extends StatelessWidget {
                   children: [
                     Text(
                       task.title ?? "",
-                      style: Theme.of(context).textTheme.headline2,
+                      style: task.isDone!
+                          ? Theme.of(context)
+                              .textTheme
+                              .headline2!
+                              .copyWith(color: MyTheme.greenColor)
+                          : Theme.of(context).textTheme.headline2,
                     ),
                     SizedBox(
                       height: 4,
@@ -94,12 +101,26 @@ class Task extends StatelessWidget {
                 ),
               ),
               Container(
-                  child: ElevatedButton(
-                onPressed: () {},
-                child: Icon(
-                  Icons.done,
-                  size: 36,
-                ),
+                  child: MaterialButton(
+                onPressed: () {
+                  MyDateBase.editIsDone(task);
+                },
+                color: task.isDone!
+                    ? MyTheme.greenColor
+                    : Theme.of(context).primaryColor,
+                child: task.isDone!
+                    ? Text(
+                        "Done!",
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline2!
+                            .copyWith(color: MyTheme.greenColor),
+                      )
+                    : Icon(
+                        Icons.done,
+                        size: 36,
+                        color: MyTheme.whiteColor,
+                      ),
               )),
             ],
           ),
