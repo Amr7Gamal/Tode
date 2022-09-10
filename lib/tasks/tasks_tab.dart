@@ -1,6 +1,7 @@
 import 'package:calendar_timeline/calendar_timeline.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:todo/datebase/my_datebase.dart';
 import 'package:todo/datebase/taskData.dart';
@@ -21,7 +22,7 @@ class _TasksState extends State<Tasks> {
     return Column(
       children: [
         Container(
-          padding: EdgeInsets.symmetric(vertical: 8),
+          padding: EdgeInsets.symmetric(vertical: 10),
           child: CalendarTimeline(
             initialDate: dateSelected,
             firstDate: DateTime.now().subtract(Duration(days: 365)),
@@ -39,7 +40,7 @@ class _TasksState extends State<Tasks> {
             activeBackgroundDayColor: Theme.of(context).primaryColor,
             dotsColor: Color(0xFF333A47),
             selectableDayPredicate: (date) => true,
-            locale: settingProvider.languaga,
+            locale: "en",
           ),
         ),
         Expanded(
@@ -47,7 +48,7 @@ class _TasksState extends State<Tasks> {
           stream: MyDateBase.listenForTasksRealTimeUpdetes(dateSelected),
           builder: (BuildContext, snapshot) {
             if (snapshot.hasError) {
-              return Text("Error");
+              return Text(AppLocalizations.of(context)!.error);
             } else if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(
                 child: CircularProgressIndicator(),

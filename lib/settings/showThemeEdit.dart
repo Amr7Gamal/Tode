@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:todo/myTheme.dart';
 
@@ -30,8 +31,8 @@ class _ShowThemeEditState extends State<ShowThemeEdit> {
                 width: double.infinity,
                 height: 60,
                 child: settingProvider.isDark()
-                    ? unSelect("light")
-                    : select("Light"),
+                    ? unSelect(AppLocalizations.of(context)!.light)
+                    : select(AppLocalizations.of(context)!.light),
               ),
             ),
             InkWell(
@@ -43,8 +44,8 @@ class _ShowThemeEditState extends State<ShowThemeEdit> {
                 width: double.infinity,
                 height: 60,
                 child: settingProvider.isDark()
-                    ? select("Dark")
-                    : unSelect("Dark"),
+                    ? select(AppLocalizations.of(context)!.dark)
+                    : unSelect(AppLocalizations.of(context)!.dark),
               ),
             ),
           ],

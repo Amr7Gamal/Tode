@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo/myTheme.dart';
 
 void showMessage(BuildContext context, message,
     {String? buttonTextOne,
@@ -28,9 +29,12 @@ void showMessage(BuildContext context, message,
       context: context,
       builder: (_) {
         return AlertDialog(
+            contentTextStyle: Theme.of(context)
+                .textTheme
+                .bodyText1!
+                .copyWith(color: MyTheme.blackColor),
             content: Text(
               message,
-              style: Theme.of(context).textTheme.headline2,
             ),
             actions: actions);
       },
@@ -49,7 +53,8 @@ void showLoading(BuildContext context, String loadingMessage,
               SizedBox(
                 width: 15,
               ),
-              Text(loadingMessage),
+              Text(loadingMessage,
+                  style: Theme.of(context).textTheme.bodyText2),
             ],
           ),
         );

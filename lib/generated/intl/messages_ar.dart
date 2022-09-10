@@ -21,8 +21,41 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "app_title": MessageLookupByLibrary.simpleMessage("Tode")
+        "add": MessageLookupByLibrary.simpleMessage("اضافة"),
+        "add_task": MessageLookupByLibrary.simpleMessage("اضافة مهمة"),
+        "app_title": MessageLookupByLibrary.simpleMessage("Tode"),
+        "dark": MessageLookupByLibrary.simpleMessage("مظلم"),
+        "delete": MessageLookupByLibrary.simpleMessage("حذف"),
+        "description": MessageLookupByLibrary.simpleMessage("الوصف"),
+        "done": MessageLookupByLibrary.simpleMessage("تم!"),
+        "done_added_the_task":
+            MessageLookupByLibrary.simpleMessage("تمت اضافة المهمة"),
+        "done_delete_the_task":
+            MessageLookupByLibrary.simpleMessage("تم حذف المهمة"),
+        "done_delete_the_task_locally":
+            MessageLookupByLibrary.simpleMessage("تم حذف المهمة محلياَ"),
+        "done_saved_The_Task_locally":
+            MessageLookupByLibrary.simpleMessage("تم حفظ المهمة محلياَ"),
+        "edit_Task": MessageLookupByLibrary.simpleMessage("تعديل المهمة"),
+        "enter_your_task": MessageLookupByLibrary.simpleMessage("اضف مهمتك"),
+        "error": MessageLookupByLibrary.simpleMessage("خطأ"),
+        "error_not_deleted_the_task":
+            MessageLookupByLibrary.simpleMessage("خطأ لم يتم حذف المهمة"),
+        "language": MessageLookupByLibrary.simpleMessage("اللغة"),
+        "light": MessageLookupByLibrary.simpleMessage("فاتح"),
+        "loading": MessageLookupByLibrary.simpleMessage("....جاري التحميل"),
+        "ok": MessageLookupByLibrary.simpleMessage("موافق"),
+        "please_enter_description":
+            MessageLookupByLibrary.simpleMessage("برجاء اضافة وصف"),
+        "please_enter_title":
+            MessageLookupByLibrary.simpleMessage("برجاء اضافة العنوان"),
+        "pless_writing_Title":
+            MessageLookupByLibrary.simpleMessage("برجاء كتابة العنوان"),
+        "select_date": MessageLookupByLibrary.simpleMessage("تحديد التاريخ"),
+        "task_description": MessageLookupByLibrary.simpleMessage("وصف المهمة"),
+        "theme": MessageLookupByLibrary.simpleMessage("المظهر"),
+        "title": MessageLookupByLibrary.simpleMessage("العنوان"),
+        "title_Task": MessageLookupByLibrary.simpleMessage("عنوان المهمة")
       };
 }

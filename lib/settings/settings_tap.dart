@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:todo/myTheme.dart';
 import 'package:todo/provider/setting_provider.dart';
@@ -19,7 +20,8 @@ class _SettingsState extends State<Settings> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Language", style: Theme.of(context).textTheme.headline2),
+          Text(AppLocalizations.of(context)!.language,
+              style: Theme.of(context).textTheme.headline2),
           InkWell(
             onTap: () {
               showLanguageEdit();
@@ -28,7 +30,7 @@ class _SettingsState extends State<Settings> {
               padding: EdgeInsets.all(12),
               margin: EdgeInsets.all(12),
               width: double.infinity,
-              height: 50,
+              height: 51,
               color: MyTheme.whiteColor,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -47,7 +49,8 @@ class _SettingsState extends State<Settings> {
           SizedBox(
             height: 18,
           ),
-          Text("Theme", style: Theme.of(context).textTheme.headline2),
+          Text(AppLocalizations.of(context)!.theme,
+              style: Theme.of(context).textTheme.headline2),
           InkWell(
             onTap: () {
               showThemeEdit();
@@ -56,13 +59,15 @@ class _SettingsState extends State<Settings> {
               padding: EdgeInsets.all(12),
               margin: EdgeInsets.all(12),
               width: double.infinity,
-              height: 50,
+              height: 51,
               color: MyTheme.whiteColor,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    settingProvider.isDark() ? "Dark" : "Light",
+                    settingProvider.isDark()
+                        ? AppLocalizations.of(context)!.dark
+                        : AppLocalizations.of(context)!.light,
                     style: Theme.of(context).textTheme.headline2!.copyWith(
                         fontWeight: FontWeight.w400,
                         color: MyTheme.lightBlueColor),

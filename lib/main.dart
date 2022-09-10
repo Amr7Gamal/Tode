@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo/home.dart';
 import 'package:todo/myTheme.dart';
 import 'package:todo/provider/setting_provider.dart';
+import 'package:todo/tasks/TaskEdite.dart';
 
 import 'firebase_options.dart';
 
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
         initialRoute: Home.nameKey,
         routes: {
           Home.nameKey: (_) => Home(),
+          TaskEdite.nameKey: (_) => TaskEdite()
         });
   }
 

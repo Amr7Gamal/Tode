@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 import 'package:todo/date.dart';
 import 'package:todo/datebase/my_datebase.dart';
 import 'package:todo/datebase/taskData.dart';
 import 'package:todo/myTheme.dart';
 import 'package:todo/showMessage.dart';
+
+import '../provider/setting_provider.dart';
+import 'showDateDialoge.dart';
 
 class TaskAdd extends StatefulWidget {
   @override
@@ -17,95 +22,101 @@ class _TaskAddState extends State<TaskAdd> {
 
   @override
   Widget build(BuildContext context) {
+    var srttingProvider = Provider.of<SettingProvider>(context);
+
     return Container(
       color: Theme.of(context).backgroundColor,
       padding: EdgeInsets.all(21),
       child: Form(
         key: formKey,
-        child: Column(
-          children: [
-            Text(
-              "Title",
-              textAlign: TextAlign.center,
-              style: Theme.of(context)
-                  .textTheme
-                  .headline2!
-                  .copyWith(color: MyTheme.lightBlueColor),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            TextFormField(
-              controller: titleController,
-              validator: (text) {
-                if (text == null || text == text.trim().isEmpty) {
-                  return "Please Enter Title";
-                }
-                return null;
-              },
-              decoration: InputDecoration(
-                  labelStyle: Theme.of(context).textTheme.headline4,
-                  label: Text("Enter Your Task")),
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            TextFormField(
-              controller: descriptionController,
-              validator: (text) {
-                if (text == null || text == text.trim().isEmpty) {
-                  return "Please Enter Description";
-                }
-                return null;
-              },
-              maxLines: 4,
-              minLines: 4,
-              decoration: InputDecoration(
-                  labelStyle: Theme.of(context).textTheme.headline4,
-                  label: Text("Description")),
-            ),
-            Container(
-                width: double.infinity,
-                margin: EdgeInsets.symmetric(vertical: 18),
-                child: Text("Select Time",
-                    textAlign: TextAlign.start,
-                    style: Theme.of(context).textTheme.headline2)),
-            InkWell(
-              onTap: () {
-                showDateDialoge();
-              },
-              child: Text(
-                "${selectedDate.year}/${selectedDate.month}/${selectedDate.day}",
-                style: Theme.of(context).textTheme.headline3,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Text(
+                AppLocalizations.of(context)!.add_task,
+                textAlign: TextAlign.center,
+                style: Theme.of(context)
+                    .textTheme
+                    .headline2!
+                    .copyWith(color: MyTheme.lightBlueColor),
               ),
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            ElevatedButton(
-                onPressed: () {
-                  addTask();
+              SizedBox(
+                height: 20,
+              ),
+              TextFormField(
+                controller: titleController,
+                validator: (text) {
+                  if (text == null || text == text.trim().isEmpty) {
+                    return AppLocalizations.of(context)!.please_enter_title;
+                  }
+                  return null;
                 },
-                child: Text("Add"))
-          ],
+                style: TextStyle(
+                  color: srttingProvider.isDark()
+                      ? MyTheme.whiteColor
+                      : MyTheme.blackColor,
+                ),
+                decoration: InputDecoration(
+                    labelStyle: Theme.of(context).textTheme.headline4,
+                    label: Text(AppLocalizations.of(context)!.enter_your_task)),
+              ),
+              SizedBox(
+                height: 50,
+              ),
+              TextFormField(
+                controller: descriptionController,
+                validator: (text) {
+                  if (text == null || text == text.trim().isEmpty) {
+                    return AppLocalizations.of(context)!
+                        .please_enter_description;
+                  }
+                  return null;
+                },
+                style: TextStyle(
+                  color: srttingProvider.isDark()
+                      ? MyTheme.whiteColor
+                      : MyTheme.blackColor,
+                ),
+                maxLines: 4,
+                minLines: 4,
+                decoration: InputDecoration(
+                    labelStyle: Theme.of(context).textTheme.headline4,
+                    fillColor: srttingProvider.isDark()
+                        ? MyTheme.blackColor
+                        : MyTheme.whiteColor,
+                    label: Text(AppLocalizations.of(context)!.description)),
+              ),
+              Container(
+                  width: double.infinity,
+                  margin: EdgeInsets.symmetric(vertical: 18),
+                  child: Text(AppLocalizations.of(context)!.select_date,
+                      textAlign: TextAlign.start,
+                      style: Theme.of(context).textTheme.headline2)),
+              InkWell(
+                onTap: () {
+                  showEditDate();
+                },
+                child: Text(
+                  "${selectedDate.year}/${selectedDate.month}/${selectedDate.day}",
+                  style: Theme.of(context).textTheme.headline3,
+                ),
+              ),
+              SizedBox(
+                height: 25,
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    addTask();
+                  },
+                  child: Text(AppLocalizations.of(context)!.add))
+            ],
+          ),
         ),
       ),
     );
   }
 
   DateTime selectedDate = DateTime.now();
-
-  void showDateDialoge() async {
-    DateTime? date = await showDatePicker(
-        context: context,
-        initialDate: selectedDate,
-        firstDate: selectedDate,
-        lastDate: DateTime.now().add(Duration(days: 365)));
-    if (date != null) {
-      selectedDate = date;
-      setState(() {});
-    }
-  }
 
   void addTask() {
     if (formKey.currentState?.validate() == true) {
@@ -118,20 +129,30 @@ class _TaskAddState extends State<TaskAdd> {
         isDone: false,
       );
 
-      showLoading(context, "Loading . .. ", isCanceLable: false);
+      showLoading(context, AppLocalizations.of(context)!.loading,
+          isCanceLable: false);
 
       MyDateBase.insertTask(task).then((value) {
         hideLoading(context);
-        showMessage(context, "done",
-            buttonTextOne: "OK", buttonActionOne: () {});
+        showMessage(
+          context,
+          AppLocalizations.of(context)!.done_added_the_task,
+          buttonTextOne: AppLocalizations.of(context)!.ok,
+        );
       }).onError((error, stackTrace) {
         hideLoading(context);
-
-        showMessage(context, "error");
+        showMessage(
+            context, AppLocalizations.of(context)!.error_not_deleted_the_task);
       }).timeout(Duration(seconds: 6), onTimeout: () {
         hideLoading(context);
-        showMessage(context, "done cache");
+        showMessage(
+            context, AppLocalizations.of(context)!.done_saved_The_Task_locally);
       });
     }
+  }
+
+  void showEditDate() async {
+    selectedDate = await showDateDialoge(context, selectedDate);
+    setState(() {});
   }
 }

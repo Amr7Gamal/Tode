@@ -21,8 +21,43 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "app_title": MessageLookupByLibrary.simpleMessage("Tode")
+        "add": MessageLookupByLibrary.simpleMessage("Add"),
+        "add_task": MessageLookupByLibrary.simpleMessage("Add Task"),
+        "app_title": MessageLookupByLibrary.simpleMessage("Tode"),
+        "dark": MessageLookupByLibrary.simpleMessage("dark"),
+        "delete": MessageLookupByLibrary.simpleMessage("Delete"),
+        "description": MessageLookupByLibrary.simpleMessage("Description"),
+        "done": MessageLookupByLibrary.simpleMessage("Done!"),
+        "done_added_the_task":
+            MessageLookupByLibrary.simpleMessage("Done Added The Task"),
+        "done_delete_the_task":
+            MessageLookupByLibrary.simpleMessage("Done Delete The Task"),
+        "done_delete_the_task_locally": MessageLookupByLibrary.simpleMessage(
+            "Done Delete The Task Locally"),
+        "done_saved_The_Task_locally":
+            MessageLookupByLibrary.simpleMessage("Done Saved The Task locally"),
+        "edit_Task": MessageLookupByLibrary.simpleMessage("Edit Task"),
+        "enter_your_task":
+            MessageLookupByLibrary.simpleMessage("Enter Your Task"),
+        "error": MessageLookupByLibrary.simpleMessage("Error"),
+        "error_not_deleted_the_task":
+            MessageLookupByLibrary.simpleMessage("Error Not deleted The Task"),
+        "language": MessageLookupByLibrary.simpleMessage("Language"),
+        "light": MessageLookupByLibrary.simpleMessage("Light"),
+        "loading": MessageLookupByLibrary.simpleMessage("Loading ..."),
+        "ok": MessageLookupByLibrary.simpleMessage("OK"),
+        "please_enter_description":
+            MessageLookupByLibrary.simpleMessage("Please Enter Description"),
+        "please_enter_title":
+            MessageLookupByLibrary.simpleMessage("Please Enter Title"),
+        "pless_writing_Title":
+            MessageLookupByLibrary.simpleMessage("Pless Writing Title"),
+        "select_date": MessageLookupByLibrary.simpleMessage("Select Date"),
+        "task_description":
+            MessageLookupByLibrary.simpleMessage("Description Task"),
+        "theme": MessageLookupByLibrary.simpleMessage("Theme"),
+        "title": MessageLookupByLibrary.simpleMessage("Title"),
+        "title_Task": MessageLookupByLibrary.simpleMessage("Title Task")
       };
 }

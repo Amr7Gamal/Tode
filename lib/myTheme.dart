@@ -24,6 +24,7 @@ class MyTheme {
         unselectedItemColor: black38Color,
       ),
       textTheme: TextTheme(
+          headline1: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           headline2: TextStyle(
               fontSize: 20, fontWeight: FontWeight.bold, color: blackColor),
           headline3: TextStyle(
@@ -43,6 +44,8 @@ class MyTheme {
         unselectedItemColor: blackColor,
       ),
       textTheme: TextTheme(
+          headline1: TextStyle(
+              fontSize: 24, fontWeight: FontWeight.bold, color: whiteColor),
           headline2: TextStyle(
               fontSize: 20, fontWeight: FontWeight.bold, color: whiteColor),
           headline3: TextStyle(

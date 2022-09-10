@@ -43,4 +43,13 @@ class MyDateBase {
     var doc = getTask().doc(task.id);
     doc.update({"isDone": task.isDone! ? false : true});
   }
+
+  static void updateTask(TaskData task) {
+    var doc = getTask();
+    doc.doc(task.id).update({
+      "title": task.title,
+      "descripion": task.description,
+      "dateTime": dateOnly(task.dateTime!).millisecondsSinceEpoch
+    });
+  }
 }
