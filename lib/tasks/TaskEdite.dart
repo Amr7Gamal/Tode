@@ -59,7 +59,9 @@ class _TaskEditeState extends State<TaskEdite> {
                 Text(
                   AppLocalizations.of(context)!.app_title,
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headline1,
+                  style: Theme.of(context).textTheme.headline1!.copyWith(
+                    color: MyTheme.whiteColor
+                  ),
                 ),
               ],
             ),
